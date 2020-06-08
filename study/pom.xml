@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.qw</groupId>
+    <artifactId>study</artifactId>
+    <version>1.0.0</version>
+    <name>study</name>
+    <description>Demo project for Spring Boot</description>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.alipay.sdk/alipay-sdk-java -->
+        <dependency>
+            <groupId>com.alipay.sdk</groupId>
+            <artifactId>alipay-sdk-java</artifactId>
+            <version>4.9.124.ALL</version>
+        </dependency>
+
+        <!-- RESTful Client -->
+        <!--<dependency>-->
+            <!--<groupId>org.elasticsearch.client</groupId>-->
+            <!--<artifactId>elasticsearch-rest-high-level-client</artifactId>-->
+            <!--<version>7.3.1</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>org.elasticsearch.client</groupId>-->
+            <!--<artifactId>elasticsearch-rest-client</artifactId>-->
+            <!--<version>7.3.1</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>org.elasticsearch</groupId>-->
+            <!--<artifactId>elasticsearch</artifactId>-->
+            <!--<version>7.3.1</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>com.fasterxml.jackson.core</groupId>-->
+            <!--<artifactId>jackson-databind</artifactId>-->
+            <!--<version>2.9.8</version>-->
+        <!--</dependency>-->
+
+        <!-- 分割线 -->
+
+        <!-- Transport Client -->
+        <!--<dependency>-->
+            <!--<groupId>org.elasticsearch</groupId>-->
+            <!--<artifactId>elasticsearch</artifactId>-->
+            <!--<version>1.4.4</version>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>transport</artifactId>
+            <version>6.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.8.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.8</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>5.1.9.RELEASE</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.2.0.RELEASE</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>5.2.0.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>3.2.5</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <!-- Maven 自带的中央仓库使用的Id为central 如果其他的仓库声明也是用该Id
+            就会覆盖中央仓库的配置 -->
+            <id>mvnrepository</id>
+            <name>mvnrepository</name>
+            <url>http://www.mvnrepository.com/</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+</project>

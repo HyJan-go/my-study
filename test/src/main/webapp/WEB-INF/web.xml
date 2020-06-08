@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4"
+         xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+        http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+    <display-name>test</display-name>
+    <!-- 加载spring容器，注意还需要加载mybatis给spring -->
+    <!--<context-param>-->
+        <!--<param-name>contextConfigLocation</param-name>-->
+        <!--<param-value>classpath:spring/spring-*.xml,classpath:mybatis/mybatis-*.xml</param-value>-->
+    <!--</context-param>-->
+    <!--&lt;!&ndash; spring加载前端控制器 &ndash;&gt;-->
+    <!--&lt;!&ndash; 如果是用mvn命令生成的xml，需要修改servlet版本为3.1 &ndash;&gt;-->
+    <!--&lt;!&ndash; 配置DispatcherServlet &ndash;&gt;-->
+    <!--<servlet>-->
+        <!--<servlet-name>seckill-dispatcher</servlet-name>-->
+        <!--<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>-->
+        <!--&lt;!&ndash; 配置springMVC需要加载的配置文件-->
+            <!--spring-dao.xml,spring-service.xml,spring-web.xml-->
+            <!--Mybatis - > spring -> springmvc-->
+         <!--&ndash;&gt;-->
+        <!--&lt;!&ndash; 加载spring容器监听器 &ndash;&gt;-->
+        <!--<init-param>-->
+            <!--<param-name>contextConfigLocation</param-name>-->
+            <!--<param-value>classpath:spring/spring-*.xml</param-value>-->
+        <!--</init-param>-->
+    <!--</servlet>-->
+    <!--&lt;!&ndash; url模式 &ndash;&gt;-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>seckill-dispatcher</servlet-name>-->
+        <!--&lt;!&ndash; 默认匹配所有的请求 &ndash;&gt;-->
+        <!--<url-pattern>/</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!--&lt;!&ndash; 乱码过滤器 &ndash;&gt;-->
+    <!--<filter>-->
+        <!--<filter-name>CharacterEncodingFilter</filter-name>-->
+        <!--<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>-->
+        <!--<init-param>-->
+            <!--<param-name>encoding</param-name>-->
+            <!--<param-value>UTF-8</param-value>-->
+        <!--</init-param>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>CharacterEncodingFilter</filter-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
+
+
+    <!--&lt;!&ndash; druid &ndash;&gt;-->
+    <!--<servlet>-->
+        <!--<servlet-name>DruidStatView</servlet-name>-->
+        <!--<servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>-->
+        <!--<init-param>-->
+            <!--&lt;!&ndash; 用户名 &ndash;&gt;-->
+            <!--<param-name>loginUserName</param-name>-->
+            <!--<param-value>admin</param-value>-->
+        <!--</init-param>-->
+        <!--<init-param>-->
+            <!--&lt;!&ndash; 登录密码 &ndash;&gt;-->
+            <!--<param-name>loginPassword</param-name>-->
+            <!--<param-value>123456</param-value>-->
+        <!--</init-param>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>DruidStatView</servlet-name>-->
+        <!--<url-pattern>/druid/*</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <!--<filter>-->
+        <!--<filter-name>DruidWebStatFilter</filter-name>-->
+        <!--<filter-class>com.alibaba.druid.support.http.WebStatFilter</filter-class>-->
+        <!--<init-param>-->
+            <!--<param-name>exclusions</param-name>-->
+            <!--<param-value>*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*</param-value>-->
+        <!--</init-param>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>DruidWebStatFilter</filter-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
+</web-app>
