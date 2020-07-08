@@ -19,6 +19,7 @@ import java.security.cert.X509Certificate;
 /**
  * @program: test
  * @description: 获取页面的值并生成类
+ *  获取枚举类优化过的，这次生成的配置准确率达到90%+
  * @author: HyJan
  * @create: 2020-05-27 15:12
  **/
@@ -75,17 +76,19 @@ public class MySearchTest {
             String[] values = new String[tag.first().childrenSize()];
 
             for (int i = 0; i < tag.first().childrenSize(); i++) {
-
-                String[] s = tag.first().child(i).text().split(" ");
-                name[i] = s[0];
-                values[i] = s[1];
+                System.out.println(tag.first().child(i).child(1).text());
+//                System.out.println(tag.first().child(i + 1));
+                System.out.println("========================");
+                String[] s = tag.first().child(i).child(0).text().split(" ");
+                name[i] = tag.first().child(i).child(0).text();
+                values[i] = tag.first().child(i).child(1).text();
             }
 
 
             HtmlData.toData(classNameEnum,name,values,null,"template-enum.ftl");
 //            generatorEnumClass(classNameEnum, name, values);
 
-            System.out.println(field);
+//            System.out.println(field);
 
 //            for (int i = 0; i < flex.size(); i++) {
 //                System.out.println("左侧属性" + flex.get(i).text());
