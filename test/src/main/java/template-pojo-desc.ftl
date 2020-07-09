@@ -10,6 +10,9 @@ import java.util.List;
 public class ${className} {
 
 <#list fields as attr>
+    /**
+     * ${attr.desc}
+     */
     @JSONField(name = "${attr.code}")
     private ${attr.fieldName} ${attr.msg};
 

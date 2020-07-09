@@ -1,11 +1,18 @@
 package com.wefly.freemaker;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * @program: test
- * @description: TODO
+ * @description: 要获取的实体类封装
  * @author: HyJan
  * @create: 2020-05-28 10:16
  **/
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Field {
 
     private String fieldName;
@@ -13,6 +20,11 @@ public class Field {
     private String code;
 
     private String msg;
+
+    /**
+     * 注释
+     */
+    private String desc;
 
     public Field(String fieldName, String code, String msg) {
         this.fieldName = fieldName;

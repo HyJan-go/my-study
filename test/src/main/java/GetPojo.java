@@ -22,7 +22,7 @@ import java.util.*;
 
 /**
  * @program: test
- * @description: 获取页面的值并生成类
+ * @description: 获取页面的值并生成类(带上注释)
  * @author: HyJan
  * @create: 2020-05-27 15:12
  **/
@@ -31,7 +31,7 @@ public class GetPojo {
     //    private static String url = "https://developers.e.qq.com/docs/reference/enum?version=1.2";
 //    private static String url = "https://developers.e.qq.com/docs/api/adsmanagement/adcreatives/adcreatives_add?version=1.3";
 //    private static String url = "https://developers.e.qq.com/docs/api/adsmanagement/adcreatives/adcreatives_update?version=1.3";
-    private static String url = "https://developers.e.qq.com/docs/api/insights/ad_insights/daily_reports_get?version=1.3";
+    private static String url = "https://developers.e.qq.com/docs/api/tools/diagnosis/ad_diagnosis_get?version=1.3";
 
     public static void main(String[] args) throws Exception {
         getArticleListFromUrl(url);
@@ -65,18 +65,21 @@ public class GetPojo {
 //        System.out.println(elements.first().text());
 
         // TODO 修改表格位置 2 <---> 4
-        Elements table = elements.get(2).getElementsByTag("tbody");
+        Elements table = elements.get(4).getElementsByTag("tbody");
 //        System.out.println(table.first().childNodeSize());
 
 
         // 字段名称
         String[] name = new String[table.first().childrenSize()];
 
-        // 对应的码 code
+        // 对应的码 code(原来的字段名字,eg: a_b_c)
         String[] code = new String[table.first().childrenSize()];
 
         // 对应的值 msg
         String[] values = new String[table.first().childrenSize()];
+
+        // 注释值
+        String[] desc = new String[table.first().childrenSize()];
 
         for (int i = 0; i < table.first().childrenSize(); i++) {
             // 字段类型
@@ -87,6 +90,11 @@ public class GetPojo {
             // 获取到的字段名
             code[i] = toDeleteTrim(table.first().child(i).child(0).text());
 
+            // 获取注释字段
+            desc[i] = table.first().child(i).child(2).text();
+
+            System.out.println("注释: " + table.first().child(i).child(2).text());
+
             // 字段名
             values[i] = toCaseName(table.first().child(i).child(0).text());
         }
@@ -95,8 +103,10 @@ public class GetPojo {
 
 //        System.out.println(name.toString() + ":" + code.toString() + ":" + values.toString());
 
+        // 不带注释的实体类
 //        toData("TencentAdCreativeAddRequest",name,values,code,"template-pojo.ftl");
-        toData("TencentDailyReportsGetRequest",name,values,code,"template-pojo.ftl");
+        // 生成带注释的实体类
+        toData("TencentAdDiagnosisGetResponse", name, values, code, desc, "template-pojo-desc.ftl");
 
     }
 
@@ -126,12 +136,48 @@ public class GetPojo {
     }
 
     /**
+     * 带注释的实体类生成
+     *
+     * @param className
+     * @param fields
+     * @param value
+     * @param code
+     * @param desc
+     * @param tpl
+     * @throws Exception
+     */
+    public static void toData(String className, String[] fields, String[] value, String[] code, String[] desc, String tpl) throws Exception {
+
+        if (StringUtils.isBlank(tpl)) {
+            tpl = "template.ftl";
+        }
+
+        File file = new File("src/main/java");
+
+        Map<String, Object> data = new HashMap<>();
+        List<Field> list = new ArrayList<>();
+        if (Objects.isNull(code)) {
+            for (int i = 0; i < fields.length; i++) {
+                list.add(new Field(fields[i], String.valueOf(i), value[i]));
+            }
+        } else {
+            for (int i = 0; i < fields.length; i++) {
+                list.add(new Field(fields[i], code[i], value[i], desc[i]));
+            }
+        }
+        data.put("fields", list);
+        data.put("className", className);
+        generate(tpl, data, file);
+    }
+
+    /**
      * 去掉一些指定的字符
+     *
      * @param str
      * @return
      */
-    public static String toDeleteTrim(String str){
-        if (str.contains("*")){
+    public static String toDeleteTrim(String str) {
+        if (str.contains("*")) {
             str = str.substring(0, str.length() - 1);
         }
         return str;
@@ -179,23 +225,24 @@ public class GetPojo {
 
     /**
      * 将传入值首字母大写
+     *
      * @param string
      * @return
      */
-    public static String firstToUpperCase(String string){
-        if (Objects.equals(string,"struct")){
+    public static String firstToUpperCase(String string) {
+        if (Objects.equals(string, "struct")) {
             return "Object";
         }
-        if (Objects.equals(string,"struct[]")) {
+        if (Objects.equals(string, "struct[]")) {
             return "List<>";
         }
-        if (Objects.equals(string,"string[]")){
+        if (Objects.equals(string, "string[]")) {
             return "List<String>";
         }
-        if (Objects.equals(string,"integer[]")){
+        if (Objects.equals(string, "integer[]")) {
             return "List<Integer>";
         }
-        return string.substring(0,1).toUpperCase() + string.substring(1);
+        return string.substring(0, 1).toUpperCase() + string.substring(1);
     }
 
     /**
