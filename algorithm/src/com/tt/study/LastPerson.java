@@ -60,7 +60,7 @@ public class LastPerson {
         // 定义一个删除的节点位置
         int removeIndex = 0;
         while (list.size() > 1){
-            // list从零开始,所以位置要减1
+            // list从零开始,所以位置要减1,拿取余来取环，是很好的办法
             removeIndex = (removeIndex + m - 1) % list.size();
             // 选中的学生被剔除圈子
             list.remove(removeIndex);
