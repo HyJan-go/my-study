@@ -45,7 +45,7 @@ public class LastPerson {
     /**
      * 利用约瑟夫环问题进行改造
      * @param n 学生总人数
-     * @param m 
+     * @param m
      * @return
      */
     public static int LastRemaining_Solution(int n,int m){
