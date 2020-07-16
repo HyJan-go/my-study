@@ -30,7 +30,7 @@ public class BinaryTreeDeep {
     }
 
     /**
-     * 使用另外一种方式，在获取不到getLeft的情况下实现
+     * 使用另外一种方式
      * 思路：记录当前计算所在行的高度，每往下走就加1，走到null那层已经超出了，-1就可以
      */
     public static int treeDepth(TreeNode root,int depth){
