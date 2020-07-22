@@ -1,7 +1,5 @@
 package com.tt.study;
 
-import org.omg.PortableInterceptor.INACTIVE;
-
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -19,22 +17,23 @@ public class SumEq100 {
 
     /**
      * 求和为100的连续序列
+     *
      * @param sum
      * @return
      */
     public static ArrayList<ArrayList<Integer>> FindContinuousSequence(int sum) {
         ArrayList<ArrayList<Integer>> lists = new ArrayList<>();
         // 判断输入
-        if (sum < 1){
+        if (sum < 1) {
             return lists;
         }
         for (int i = 1; i < sum; i++) {
             // 因为是序列，所以至少是两个数，如果相邻相加就大于sum，往后是不会再有匹配了
-            if (i + i+1 > sum){
+            if (i + i + 1 > sum) {
                 break;
             }
             ArrayList<Integer> fun = findFun(sum, i, 0, new ArrayList<Integer>());
-            if (Objects.nonNull(fun)){
+            if (Objects.nonNull(fun)) {
                 lists.add(fun);
             }
         }
@@ -43,29 +42,30 @@ public class SumEq100 {
 
     /**
      * 递归方式求序列只和等于100
+     *
      * @param sum
      * @param i
      * @param list
      * @return
      */
-    public static ArrayList<Integer> findFun(int sum,int i,int iSum,ArrayList<Integer> list){
+    public static ArrayList<Integer> findFun(int sum, int i, int iSum, ArrayList<Integer> list) {
         // 所有递归函数，先判断退出条件
-        if (iSum + i > sum){
+        if (iSum + i > sum) {
             list.clear();
             return null;
-        } else if (iSum + i == sum){
+        } else if (iSum + i == sum) {
             list.add(i);
             return list;
-        }else {
+        } else {
             list.add(i);
-            return findFun(sum,i + 1,iSum + i,list);
+            return findFun(sum, i + 1, iSum + i, list);
         }
     }
 
     public static void main(String[] args) {
         ArrayList<ArrayList<Integer>> lists = FindContinuousSequence(100);
-        for (ArrayList<Integer> list: lists
-             ) {
+        for (ArrayList<Integer> list : lists
+        ) {
             System.out.println(list.toString());
         }
     }
