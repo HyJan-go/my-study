@@ -1,7 +1,6 @@
 package com.qw.wefly.core.modules.tencent.model.request;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.qw.wefly.core.modules.tencent.model.inner.TencentFiltering;
 import lombok.Data;
 
 import java.util.List;
