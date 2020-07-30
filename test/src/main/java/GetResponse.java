@@ -1,6 +1,7 @@
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
+import com.util.FreemarkerGeneratorUtil;
 import com.wefly.common.Result;
 import com.wefly.common.TencentModelField;
 import com.wefly.freemaker.Field;
@@ -116,7 +117,7 @@ public class GetResponse {
 //        System.out.println(name.toString() + ":" + code.toString() + ":" + values.toString());
 
 //        toData("TencentAdCreativeAddRequest",name,values,code,"template-pojo.ftl");
-        toData("TencentDailyReportInfo",name,values,code,"template-pojo.ftl");
+        FreemarkerGeneratorUtil.toData("TencentDailyReportInfo",name,values,code,"template-pojo.ftl");
 
     }
 

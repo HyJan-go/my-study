@@ -4,6 +4,11 @@ import java.util.TreeMap;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+/**
+* @description: ${desc}
+* @author: HyJan
+* @create: ${YEAR}-${MONTH}-${DAY} ${HOUR}:${MINUTE}
+**/
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum ${className} {
 

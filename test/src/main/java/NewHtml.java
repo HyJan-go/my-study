@@ -1,6 +1,7 @@
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
+import com.util.FreemarkerGeneratorUtil;
 import com.wefly.freemaker.Field;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -86,7 +87,7 @@ public class NewHtml {
 
         System.out.println(name.toString() + ":"  + values.toString());
 
-        toData("TencentPromotedTargetEnums",name,values,null,"template-enum.ftl");
+        FreemarkerGeneratorUtil.toData("TencentPromotedTargetEnums",name,values,null,"template-enum.ftl");
 
     }
 

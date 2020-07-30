@@ -3,6 +3,7 @@ package com.kuaishou;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
+import com.util.FreemarkerGeneratorUtil;
 import com.wefly.freemaker.Field;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -19,6 +20,7 @@ import java.io.*;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -149,7 +151,7 @@ public class GetPojo {
         // 不带注释的实体类
 //        toData("TencentAdCreativeAddRequest",name,values,code,"template-pojo.ftl");
         // 生成带注释的实体类
-        toData("AccountReportDetails", name, values, code, desc, "template-pojo-desc.ftl");
+        FreemarkerGeneratorUtil.toData("AccountReportDetails", name, values, code, desc,"广告主报表返回详细信息", "template-pojo-desc.ftl");
 
     }
 
@@ -176,6 +178,20 @@ public class GetPojo {
         data.put("className", className);
 
         generate(tpl, data, file);
+    }
+
+    private static void setTime(Map<String,Object> data){
+        // ${YEAR}-${MONTH}-${DAY} ${HOUR}:${MINUTE}
+        String YEAR = String.valueOf(LocalDateTime.now().getYear());
+        String MONTH = String.valueOf(LocalDateTime.now().getMonthValue());
+        String DAY = String.valueOf(LocalDateTime.now().getDayOfMonth());
+        String HOUR = String.valueOf(LocalDateTime.now().getHour());
+        String MINUTE = String.valueOf(LocalDateTime.now().getMinute());
+        data.put("YEAR",YEAR);
+        data.put("MONTH",MONTH);
+        data.put("DAY",DAY);
+        data.put("HOUR",HOUR);
+        data.put("MINUTE",MINUTE);
     }
 
     /**
@@ -210,6 +226,7 @@ public class GetPojo {
         }
         data.put("fields", list);
         data.put("className", className);
+        setTime(data);
         generate(tpl, data, file);
     }
 
@@ -285,16 +302,16 @@ public class GetPojo {
         if (Objects.equals(string, "integer[]")) {
             return "List<Integer>";
         }
-        if (Objects.equals(string,"float")){
+        if (Objects.equals(string, "float")) {
             return "BigDecimal";
         }
-        if (Objects.equals(string,"number")){
+        if (Objects.equals(string, "number")) {
             return "Integer";
         }
-        if (Objects.equals(string,"int")){
+        if (Objects.equals(string, "int")) {
             return "Integer";
         }
-        if (Objects.equals(string,"int[]")){
+        if (Objects.equals(string, "int[]")) {
             return "List<Integer>";
         }
         return string.substring(0, 1).toUpperCase() + string.substring(1);

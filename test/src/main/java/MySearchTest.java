@@ -1,6 +1,7 @@
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
+import com.util.FreemarkerGeneratorUtil;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -85,7 +86,7 @@ public class MySearchTest {
             }
 
 
-            HtmlData.toData(classNameEnum,name,values,null,"template-enum.ftl");
+            FreemarkerGeneratorUtil.toData(classNameEnum,name,values,null,"template-enum.ftl");
 //            generatorEnumClass(classNameEnum, name, values);
 
 //            System.out.println(field);

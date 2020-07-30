@@ -5,6 +5,11 @@ import lombok.Data;
 
 import java.util.List;
 
+/**
+* @description: ${desc}
+* @author: HyJan
+* @create: ${YEAR}-${MONTH}-${DAY} ${HOUR}:${MINUTE}
+**/
 @Data
 public class ${className} {
 

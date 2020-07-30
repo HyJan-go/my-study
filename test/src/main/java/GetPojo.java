@@ -1,6 +1,7 @@
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
+import com.util.FreemarkerGeneratorUtil;
 import com.wefly.freemaker.Field;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -106,7 +107,7 @@ public class GetPojo {
         // 不带注释的实体类
 //        toData("TencentAdCreativeAddRequest",name,values,code,"template-pojo.ftl");
         // 生成带注释的实体类
-        toData("TencentAdDiagnosisGetResponse", name, values, code, desc, "template-pojo-desc.ftl");
+        FreemarkerGeneratorUtil.toData("TencentAdDiagnosisGetResponse", name, values, code, desc, "template-pojo-desc.ftl");
 
     }
 
