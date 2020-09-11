@@ -1,4 +1,4 @@
-package com.kuaishou;
+package com.toutiao;
 
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
@@ -20,20 +20,16 @@ import java.io.*;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-import java.time.LocalDateTime;
 import java.util.*;
 
 /**
  * @program: test
- * @description: 获取页面的值并生成类(带上注释)
- * 快手拿数据
- * 先拿去sublime text 进行处理一下，然后组成一个数组
- * 此时的解决方案要改一下，复制页面的值下来做成数组，然后构建来生成
+ * @description: 手动组装生成枚举类
  * @author: HyJan
  * @create: 2020-05-27 15:12
  **/
 
-public class GetPojo {
+public class GetEnums {
 
 
     public static void main(String[] args) throws Exception {
@@ -47,32 +43,22 @@ public class GetPojo {
      */
     public static void getArticleListFromUrl() throws Exception {
 
-//        String[] table = new String[]{"advertiser_id long 广告主ID（注：非账户快手ID），在获取accessToken时返回",
-//                "start_date_min string 增量拉取过滤筛选条件，格式【yyyy-MM-dd HH:mm】 可选时间范围参见文档上方说明 ",
-//                "end_date_min string 增量拉取过滤筛选条件，格式【yyyy-MM-dd HH:mm】可选时间范围参见文档上方说明",
-//                "start_date string 过滤筛选条件，格式yyyy-MM-dd 可选时间范围参见文档上方说明",
-//                "end_date string 过滤筛选条件，格式yyyy-MM-dd 可选时间范围参见文档上方说明",
-//                "temporal_granularity string 天粒度（DAILY）／小时粒度（HOURLY），默认支持天粒度数据",
-//                "report_dims string[] \"adScene\"：按广告场景；不传/传空/传空数组：不限",
-//                "page int 请求的页码，默认为 1",
-//                "page_size int 每页行数，默认为20，最大支持500"};
+        String[] table = new String[]{"STATUS_DISABLE 已禁用",
+                "STATUS_PENDING_CONFIRM 申请待审核",
+                "STATUS_PENDING_VERIFIED 待验证",
+                "STATUS_CONFIRM_FAIL 审核不通过",
+                "STATUS_ENABLE 已审核",
+                "STATUS_CONFIRM_FAIL_END CRM审核不通过",
+                "STATUS_PENDING_CONFIRM_MODIFY 修改待审核",
+                "STATUS_CONFIRM_MODIFY_FAIL 修改审核不通过",
+                "STATUS_LIMIT 限制",
+                "STATUS_WAIT_FOR_BPM_AUDIT 等待CRM审核",
+                "STATUS_WAIT_FOR_PUBLIC_AUTH 待对公验证",
+                "STATUS_SELF_SERVICE_UNAUDITED 自助开户待验证资质"};
 
-        String[] table = new String[]{"convert_activate_callback_url string 激活回传地址",
-                "convert_secret_key string 加密密钥",
-                "display_track_url string 展示监测链接",
-                "video_play_effective_track_url string 视频有效播放监测链接",
-                "video_play_done_track_url string 视频播放完毕监测链接",
-                "video_play_track_url string 视频播放监测链接",
-                "deep_external_action string 深度转化目标，详见【附录-深度转化类型】允许值\"AD_CONVERT_TYPE_ACTIVE_REGISTER\""};
 
         // 字段名称
         String[] name = new String[table.length];
-
-        // 对应的码 code(原来的字段名字,eg: a_b_c)
-        String[] code = new String[table.length];
-
-        // 对应的值 msg
-        String[] values = new String[table.length];
 
         // 注释值
         String[] desc = new String[table.length];
@@ -80,22 +66,17 @@ public class GetPojo {
         for (int i = 0; i < table.length; i++) {
             String[] s = table[i].split(" ");
             // 字段类型
-            name[i] = firstToUpperCase(toDeleteTrim(s[1]));
+            name[i] = firstToUpperCase(toDeleteTrim(s[0]));
 
             System.out.println(s[0]);
 
             System.out.println(name[i]);
 
-            // 获取到的字段名
-            code[i] = toDeleteTrim(s[0]);
-
             // 获取注释字段
-            desc[i] = s[2];
+            desc[i] = s[1];
 
-            System.out.println("注释: " + s[2]);
+            System.out.println("注释: " + s[1]);
 
-            // 字段名
-            values[i] = toCaseName(s[0]);
         }
 
         System.out.println("==============================");
@@ -105,7 +86,8 @@ public class GetPojo {
         // 不带注释的实体类
 //        toData("TencentAdCreativeAddRequest",name,values,code,"template-pojo.ftl");
         // 生成带注释的实体类
-        FreemarkerGeneratorUtil.toData("AccountReportDetails", name, values, code, desc,"广告主报表返回详细信息", "template-pojo-desc.ftl");
+//        toData();
+        FreemarkerGeneratorUtil.toData("ToutiaoAdvertiserStatusEnums", name, desc, null, null,"广告主状态", "template-enum.ftl");
 
     }
 
@@ -134,20 +116,6 @@ public class GetPojo {
         generate(tpl, data, file);
     }
 
-    private static void setTime(Map<String,Object> data){
-        // ${YEAR}-${MONTH}-${DAY} ${HOUR}:${MINUTE}
-        String YEAR = String.valueOf(LocalDateTime.now().getYear());
-        String MONTH = String.valueOf(LocalDateTime.now().getMonthValue());
-        String DAY = String.valueOf(LocalDateTime.now().getDayOfMonth());
-        String HOUR = String.valueOf(LocalDateTime.now().getHour());
-        String MINUTE = String.valueOf(LocalDateTime.now().getMinute());
-        data.put("YEAR",YEAR);
-        data.put("MONTH",MONTH);
-        data.put("DAY",DAY);
-        data.put("HOUR",HOUR);
-        data.put("MINUTE",MINUTE);
-    }
-
     /**
      * 带注释的实体类生成
      *
@@ -159,7 +127,7 @@ public class GetPojo {
      * @param tpl
      * @throws Exception
      */
-    public static void toData(String className, String[] fields, String[] value, String[] code, String[] desc, String tpl) throws Exception {
+    public static void toData(String className, String[] fields, String[] value, String[] code, String[] desc, String tpl,String description) throws Exception {
 
         if (StringUtils.isBlank(tpl)) {
             tpl = "template.ftl";
@@ -178,9 +146,14 @@ public class GetPojo {
                 list.add(new Field(fields[i], code[i], value[i], desc[i]));
             }
         }
+        // 添加类注释
+        if (StringUtils.isNotBlank(description)){
+            data.put("desc",description);
+        }else {
+            data.put("desc","描述");
+        }
         data.put("fields", list);
         data.put("className", className);
-        setTime(data);
         generate(tpl, data, file);
     }
 
@@ -256,17 +229,11 @@ public class GetPojo {
         if (Objects.equals(string, "integer[]")) {
             return "List<Integer>";
         }
-        if (Objects.equals(string, "float")) {
+        if (Objects.equals(string,"float")){
             return "BigDecimal";
         }
-        if (Objects.equals(string, "number")) {
+        if (Objects.equals(string,"number")){
             return "Integer";
-        }
-        if (Objects.equals(string, "int")) {
-            return "Integer";
-        }
-        if (Objects.equals(string, "int[]")) {
-            return "List<Integer>";
         }
         return string.substring(0, 1).toUpperCase() + string.substring(1);
     }
