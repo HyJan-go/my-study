@@ -20,7 +20,7 @@ import java.security.cert.X509Certificate;
 /**
  * @program: test
  * @description: 获取页面的值并生成类
- *  获取枚举类优化过的，这次生成的配置准确率达到90%+
+ * 获取枚举类优化过的，这次生成的配置准确率达到90%+
  * @author: HyJan
  * @create: 2020-05-27 15:12
  **/
@@ -62,6 +62,10 @@ public class MySearchTest {
 
             String classNameEnum = toClassName(className.first().attr("id"));
 
+            // 枚举类注释 , 只有element才能直接拿到text
+            String desc = element.getElementById(className.first().attr("id")).text();
+            System.out.println("----------------》 类描述    " + element);
+
             // 将类名化为正确的权限
 
             Elements blk = element.getElementsByClass("blk");
@@ -80,13 +84,12 @@ public class MySearchTest {
                 System.out.println(tag.first().child(i).child(1).text());
 //                System.out.println(tag.first().child(i + 1));
                 System.out.println("========================");
-                String[] s = tag.first().child(i).child(0).text().split(" ");
                 name[i] = tag.first().child(i).child(0).text();
                 values[i] = tag.first().child(i).child(1).text();
             }
 
 
-            FreemarkerGeneratorUtil.toData(classNameEnum,name,values,null,"template-enum.ftl");
+            FreemarkerGeneratorUtil.toData(classNameEnum, name, values, null, null, desc, "template-enum.ftl");
 //            generatorEnumClass(classNameEnum, name, values);
 
 //            System.out.println(field);
@@ -247,10 +250,10 @@ public class MySearchTest {
     /**
      * 信任任何站点，实现https页面的正常访问
      */
-
     public static void trustEveryone() {
         try {
             HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
+                @Override
                 public boolean verify(String hostname, SSLSession session) {
                     return true;
                 }
@@ -258,12 +261,15 @@ public class MySearchTest {
 
             SSLContext context = SSLContext.getInstance("TLS");
             context.init(null, new X509TrustManager[]{new X509TrustManager() {
+                @Override
                 public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
                 }
 
+                @Override
                 public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
                 }
 
+                @Override
                 public X509Certificate[] getAcceptedIssuers() {
                     return new X509Certificate[0];
                 }
