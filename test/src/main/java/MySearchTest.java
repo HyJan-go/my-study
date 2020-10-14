@@ -64,7 +64,7 @@ public class MySearchTest {
 
             // 枚举类注释 , 只有element才能直接拿到text
             String desc = element.getElementById(className.first().attr("id")).text();
-            System.out.println("----------------》 类描述    " + element);
+            System.out.println("----------------》 类描述    " + desc);
 
             // 将类名化为正确的权限
 
