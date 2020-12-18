@@ -3,6 +3,7 @@ package com.toutiao;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
+import com.util.FreemarkerGeneratorUtil;
 import com.wefly.freemaker.Field;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -46,107 +47,13 @@ public class GetPojo {
      */
     public static void getArticleListFromUrl() throws Exception {
 
-        String[] table = new String[]{"stat_datetime string 数据起始时间",
-                "cost float 展现数据-总花费",
-                "show number 展现数据-展示数",
-                "avg_show_cost float 展现数据-平均千次展现费用",
-                "avg_click_cost float 展现数据-平均点击单价",
-                "ctr float 展现数据-点击率",
-                "convert number 转化数据-转化数",
-                "convert_cost float 转化数据-转化成本",
-                "convert_rate float 转化数据-转化率",
-                "deep_convert number 转化数据-深度转化数",
-                "deep_convert_cost float 转化数据-深度转化成本",
-                "deep_convert_rate float 转化数据-深度转化率",
-                "attribution_convert number 转化数据（计费时间）-转化数（计费时间）",
-                "attribution_convert_cost float 转化数据（计费时间）-转化成本（计费时间）",
-                "attribution_deep_convert number 转化数据（计费时间）-深度转化数（计费时间）",
-                "attribution_deep_convert_cost float 转化数据（计费时间）-深度转化成本（计费时间）",
-                "download_start number 应用下载广告数据-安卓下载开始数",
-                "download_start_cost float 应用下载广告数据-安卓下载开始成本",
-                "download_start_rate float 应用下载广告数据-安卓下载开始率",
-                "download_finish number 应用下载广告数据-安卓下载完成数",
-                "download_finish_cost float 应用下载广告数据-安卓下载完成成本",
-                "download_finish_rate float 应用下载广告数据-安卓下载完成率",
-                "click_install number 应用下载广告数据-点击安装数",
-                "install_finish number 应用下载广告数据-安卓安装完成数",
-                "install_finish_cost float 应用下载广告数据-安卓安装完成成本",
-                "install_finish_rate float 应用下载广告数据-安卓安装完成率",
-                "active number 应用下载广告数据-激活数",
-                "active_cost float 应用下载广告数据-激活成本",
-                "active_rate float 应用下载广告数据-激活率",
-                "register number 应用下载广告数据-注册数",
-                "active_register_cost float 应用下载广告数据-注册成本",
-                "active_register_rate float 应用下载广告数据-注册率",
-                "next_day_open number 应用下载广告数据-次留（未对回）",
-                "next_day_open_cost float 应用下载广告数据-次留成本（未对回",
-                "next_day_open_rate float 应用下载广告数据-次留率（未对回)",
-                "attribution_next_day_open_cnt number 应用下载广告数据-次留数",
-                "attribution_next_day_open_cost number 应用下载广告数据-次留成本",
-                "attribution_next_day_open_rate number 应用下载广告数据-次留率",
-                "game_addiction number 应用下载广告数据-关键行为数",
-                "game_addiction_cost float 应用下载广告数据-关键行为成本",
-                "game_addiction_rate float 应用下载广告数据-关键行为率",
-                "pay_count number 应用下载广告数据-付费数",
-                "active_pay_cost float 应用下载广告数据-付费成本",
-                "active_pay_rate float 应用下载广告数据-付费率",
-                "loan_completion number 应用下载广告数据-完件数",
-                "loan_completion_cost float 应用下载广告数据-完件成本",
-                "loan_completion_rate float 应用下载广告数据-完件率",
-                "pre_loan_credit number 应用下载广告数据-预授信数",
-                "pre_loan_credit_cost float 应用下载广告数据-预授信成本",
-                "loan_credit number 应用下载广告数据-授信数",
-                "loan_credit_cost float 应用下载广告数据-授信成本",
-                "loan_credit_rate float 应用下载广告数据-授信率",
-                "in_app_uv number 应用下载广告数据-APP内访问",
-                "in_app_detail_uv number 应用下载广告数据-APP内访问详情页",
-                "in_app_cart number 应用下载广告数据-APP内加入购物车",
-                "in_app_pay number 应用下载广告数据-APP内付费",
-                "in_app_order number 应用下载广告数据-APP内下单",
-                "phone number 落地页转化数据-点击电话按钮",
-                "form number 落地页转化数据-表单提交",
-                "map_search number 落地页转化数据-地图搜索",
-                "button number 落地页转化数据-按钮button",
-                "view number 落地页转化数据-关键页面浏览",
-                "download number 落地页转化数据-下载开始",
-                "qq number 落地页转化数据-QQ咨询",
-                "lottery number 落地页转化数据-抽奖",
-                "vote number 落地页转化数据-投票",
-                "message number 落地页转化数据-短信咨询",
-                "redirect number 落地页转化数据-页面跳转",
-                "shopping number 落地页转化数据-商品购买",
-                "consult number 落地页转化数据-在线咨询",
-                "wechat number 落地页转化数据-微信复制",
-                "phone_confirm number 落地页转化数据-智能电话-确认拨打",
-                "phone_connect number 落地页转化数据-智能电话-确认接通",
-                "consult_effective number 落地页转化数据-有效咨询",
-                "coupon number 落地页转化数据-建站卡券领取",
-                "coupon_single_page number 落地页转化数据-卡券页领取",
-                "total_play number 视频数据-播放数",
-                "valid_play number 视频数据-有效播放数",
-                "valid_play_cost float 视频数据-有效播放成本",
-                "valid_play_rate float 视频数据-有效播放率",
-                "play_25_feed_break number 视频数据-25%进度播放数",
-                "play_50_feed_break number 视频数据-50%进度播放数",
-                "play_75_feed_break number 视频数据-75%进度播放数",
-                "play_100_feed_break number 视频数据-99%进度播放数",
-                "average_play_time_per_play float 视频数据-平均单次播放时长",
-                "play_over_rate float 视频数据-播完率",
-                "wifi_play_rate float 视频数据-WiFi播放占比",
-                "wifi_play number 视频数据-WiFi播放量",
-                "play_duration_sum number 视频数据-播放时长，单位ms",
-                "advanced_creative_phone_click number 附加创意-附加创意电话按钮点击",
-                "advanced_creative_counsel_click number 附加创意-附加创意在线咨询点击",
-                "advanced_creative_form_click number 附加创意-附加创意表单按钮点击",
-                "advanced_creative_coupon_addition number 附加创意-附加创意卡券领取",
-                "share number 互动数据-分享数",
-                "comment number 互动数据-评论数",
-                "like number 互动数据-点赞数",
-                "follow number 互动数据-新增关注数",
-                "home_visited number 互动数据-主页访问量",
-                "ies_challenge_click number 互动数据-挑战赛查看数",
-                "ies_music_click number 互动数据-音乐查看数",
-                "location_click number 互动数据-POI点击"};
+        String[] table = new String[]{"advertiser_id number 广告主ID",
+                "search_key string 搜索关键字，appid或者应用名，可以为空，可以传中文，长度不超过50",
+                "search_type string 搜索类型:",
+                "page number 页码，默认值为1",
+                "page_size number 页面大小，默认值为10，最大不超过200",
+                "create_time object 按创建时间查询的时间范围",
+                "scheduled_publish_time object 按预约发布时间查询的时间范围"};
 
 
         // 字段名称
@@ -189,8 +96,8 @@ public class GetPojo {
         // 不带注释的实体类
 //        toData("TencentAdCreativeAddRequest",name,values,code,"template-pojo.ftl");
         // 生成带注释的实体类
-        toData("ToutiaoAdvertiserReport", name, values, code, desc, "template-pojo-desc.ftl");
-
+//        toData("ToutiaoAdvertiserReport", name, values, code, desc, "template-pojo-desc.ftl");
+        FreemarkerGeneratorUtil.toData("ToutiaoGameGetRequest", name, values, code, desc,"头条获取游戏详情", "template-pojo-desc.ftl");
     }
 
     public static void toData(String className, String[] fields, String[] value, String[] code, String tpl) throws Exception {

@@ -32,7 +32,9 @@ public class GetPojo {
     //    private static String url = "https://developers.e.qq.com/docs/reference/enum?version=1.2";
 //    private static String url = "https://developers.e.qq.com/docs/api/adsmanagement/adcreatives/adcreatives_add?version=1.3";
 //    private static String url = "https://developers.e.qq.com/docs/api/adsmanagement/adcreatives/adcreatives_update?version=1.3";
-    private static String url = "https://developers.e.qq.com/docs/api/tools/diagnosis/ad_diagnosis_get?version=1.3";
+//    private static String url = "https://developers.e.qq.com/docs/api/tools/diagnosis/ad_diagnosis_get?version=1.3";
+    private static String url = "https://developers.e.qq.com/docs/api/audiences_management/custom_audience/custom_audiences_add?version=1.2";
+
 
     public static void main(String[] args) throws Exception {
         getArticleListFromUrl(url);
@@ -107,7 +109,7 @@ public class GetPojo {
         // 不带注释的实体类
 //        toData("TencentAdCreativeAddRequest",name,values,code,"template-pojo.ftl");
         // 生成带注释的实体类
-        FreemarkerGeneratorUtil.toData("TencentAdDiagnosisGetResponse", name, values, code, desc, "template-pojo-desc.ftl");
+        FreemarkerGeneratorUtil.toData("TencentCustomAudiencesAddResponse", name, values, code, desc, "template-pojo-desc.ftl");
 
     }
 

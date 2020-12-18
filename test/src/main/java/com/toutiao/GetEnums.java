@@ -43,18 +43,18 @@ public class GetEnums {
      */
     public static void getArticleListFromUrl() throws Exception {
 
-        String[] table = new String[]{"STATUS_DISABLE 已禁用",
-                "STATUS_PENDING_CONFIRM 申请待审核",
-                "STATUS_PENDING_VERIFIED 待验证",
-                "STATUS_CONFIRM_FAIL 审核不通过",
-                "STATUS_ENABLE 已审核",
-                "STATUS_CONFIRM_FAIL_END CRM审核不通过",
-                "STATUS_PENDING_CONFIRM_MODIFY 修改待审核",
-                "STATUS_CONFIRM_MODIFY_FAIL 修改审核不通过",
-                "STATUS_LIMIT 限制",
-                "STATUS_WAIT_FOR_BPM_AUDIT 等待CRM审核",
-                "STATUS_WAIT_FOR_PUBLIC_AUTH 待对公验证",
-                "STATUS_SELF_SERVICE_UNAUDITED 自助开户待验证资质"};
+        String[] table = new String[]{"AD_CONVERT_SOURCE_TYPE_INTERNAL 平台提供的转化工具",
+                "AD_CONVERT_SOURCE_TYPE_JS 代码检测转化  ",
+                "AD_CONVERT_SOURCE_TYPE_XPATH 路径转化",
+                "AD_CONVERT_SOURCE_TYPE_APP_DOWNLOAD 应用下载API",
+                "AD_CONVERT_SOURCE_TYPE_API 落地页API（废弃，不能新建，历史数据保留）",
+                "AD_CONVERT_SOURCE_TYPE_H5_API 落地页API（H5）",
+                "AD_CONVERT_SOURCE_TYPE_SDK 应用下载SDK",
+                "AD_CONVERT_SOURCE_TYPE_OPEN_URL 应用直达API（应用直达链接）",
+                "AD_CONVERT_SOURCE_TYPE_NORMAL_APP_DOWNLOAD 普通应用下载",
+                "AD_CONVERT_SOURCE_TYPE_CONFIG 无转化跟踪",
+                "AD_CONVERT_SOURCE_TYPE_CPS_GAME 内部游戏cps应用下载",
+                "AD_CONVERT_SOURCE_TYPE_APP_API_TEMAI 落地页API(支持特卖)"};
 
 
         // 字段名称
@@ -87,7 +87,7 @@ public class GetEnums {
 //        toData("TencentAdCreativeAddRequest",name,values,code,"template-pojo.ftl");
         // 生成带注释的实体类
 //        toData();
-        FreemarkerGeneratorUtil.toData("ToutiaoAdvertiserStatusEnums", name, desc, null, null,"广告主状态", "template-enum.ftl");
+        FreemarkerGeneratorUtil.toData("ToutiaoAConvertSourceTypeEnums", name, desc, null, null,"广告主状态", "template-enum.ftl");
 
     }
 
