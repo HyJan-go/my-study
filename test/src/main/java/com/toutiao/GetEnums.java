@@ -43,21 +43,16 @@ public class GetEnums {
      */
     public static void getArticleListFromUrl() throws Exception {
 
-        String[] table = new String[]{"ATTACHED_CREATIVE_NONE 无",
-                "ATTACHED_CREATIVE_PHONE 电话拨打",
-                "ATTACHED_CREATIVE_FORM 表单收集",
-                "ATTACHED_CREATIVE_COMMERCE_CARD 电商（即落地页）卡片",
-                "ATTACHED_CREATIVE_DOWNLOAD_CARD 商品下载卡片",
-                "ATTACHED_CREATIVE_CONSULTANT 在线咨询",
-                "ATTACHED_CREATIVE_COUPON 卡券",
-                "ATTACHED_CREATIVE_CARD 图片磁贴 ",
-                "ATTACHED_CREATIVE_INTERACT 选择磁贴",
-                "ATTACHED_CREATIVE_SMART_PHONE 智能电话",
-                "ATTACHED_CREATIVE_VOTE_INTERACT 投票磁贴",
-                "ATTACHED_CREATIVE_GAME_PACKAGE 游戏礼包",
-                "ATTACHED_CREATIVE_COUPON_INTERACT 优惠券磁贴",
-                "ATTACHED_CREATIVE_GAME_FORM 游戏表单收集",
-                "ATTACHED_CREATIVE_GAME_SUBSCRIBE 游戏预约按钮"};
+        String[] table = new String[]{"UNKNOWN 未知",
+                "DOWNLOAD 应用下载类",
+                "LANDING 落地页类",
+                "TABLE 附加创意-表单",
+                "CARD 附加创意-卡券",
+                "CONSULT 附加创意-咨询",
+                "PHONE 附加创意-电话",
+                "GAME_PACKAGE 游戏礼包码",
+                "GAME_FORM 游戏表单",
+                "GAME_SUBSCRIBE 游戏预约"};
 
 
         // 字段名称
@@ -90,7 +85,7 @@ public class GetEnums {
 //        toData("TencentAdCreativeAddRequest",name,values,code,"template-pojo.ftl");
         // 生成带注释的实体类
 //        toData();
-        FreemarkerGeneratorUtil.toData("ToutiaoAdditionalCreativeTypeEnums", name, desc, null, null,"附加创意类型", "template-enum.ftl");
+        FreemarkerGeneratorUtil.toData("ToutiaoExtensionTypeEnums", name, desc, null, null,"附加创意类型", "template-enum.ftl");
 
     }
 
