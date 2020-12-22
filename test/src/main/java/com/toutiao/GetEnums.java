@@ -43,18 +43,21 @@ public class GetEnums {
      */
     public static void getArticleListFromUrl() throws Exception {
 
-        String[] table = new String[]{"AD_CONVERT_SOURCE_TYPE_INTERNAL 平台提供的转化工具",
-                "AD_CONVERT_SOURCE_TYPE_JS 代码检测转化  ",
-                "AD_CONVERT_SOURCE_TYPE_XPATH 路径转化",
-                "AD_CONVERT_SOURCE_TYPE_APP_DOWNLOAD 应用下载API",
-                "AD_CONVERT_SOURCE_TYPE_API 落地页API（废弃，不能新建，历史数据保留）",
-                "AD_CONVERT_SOURCE_TYPE_H5_API 落地页API（H5）",
-                "AD_CONVERT_SOURCE_TYPE_SDK 应用下载SDK",
-                "AD_CONVERT_SOURCE_TYPE_OPEN_URL 应用直达API（应用直达链接）",
-                "AD_CONVERT_SOURCE_TYPE_NORMAL_APP_DOWNLOAD 普通应用下载",
-                "AD_CONVERT_SOURCE_TYPE_CONFIG 无转化跟踪",
-                "AD_CONVERT_SOURCE_TYPE_CPS_GAME 内部游戏cps应用下载",
-                "AD_CONVERT_SOURCE_TYPE_APP_API_TEMAI 落地页API(支持特卖)"};
+        String[] table = new String[]{"ATTACHED_CREATIVE_NONE 无",
+                "ATTACHED_CREATIVE_PHONE 电话拨打",
+                "ATTACHED_CREATIVE_FORM 表单收集",
+                "ATTACHED_CREATIVE_COMMERCE_CARD 电商（即落地页）卡片",
+                "ATTACHED_CREATIVE_DOWNLOAD_CARD 商品下载卡片",
+                "ATTACHED_CREATIVE_CONSULTANT 在线咨询",
+                "ATTACHED_CREATIVE_COUPON 卡券",
+                "ATTACHED_CREATIVE_CARD 图片磁贴 ",
+                "ATTACHED_CREATIVE_INTERACT 选择磁贴",
+                "ATTACHED_CREATIVE_SMART_PHONE 智能电话",
+                "ATTACHED_CREATIVE_VOTE_INTERACT 投票磁贴",
+                "ATTACHED_CREATIVE_GAME_PACKAGE 游戏礼包",
+                "ATTACHED_CREATIVE_COUPON_INTERACT 优惠券磁贴",
+                "ATTACHED_CREATIVE_GAME_FORM 游戏表单收集",
+                "ATTACHED_CREATIVE_GAME_SUBSCRIBE 游戏预约按钮"};
 
 
         // 字段名称
@@ -87,7 +90,7 @@ public class GetEnums {
 //        toData("TencentAdCreativeAddRequest",name,values,code,"template-pojo.ftl");
         // 生成带注释的实体类
 //        toData();
-        FreemarkerGeneratorUtil.toData("ToutiaoAConvertSourceTypeEnums", name, desc, null, null,"广告主状态", "template-enum.ftl");
+        FreemarkerGeneratorUtil.toData("ToutiaoAdditionalCreativeTypeEnums", name, desc, null, null,"附加创意类型", "template-enum.ftl");
 
     }
 
