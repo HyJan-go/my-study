@@ -47,12 +47,10 @@ public class GetPojo {
      */
     public static void getArticleListFromUrl() throws Exception {
 
-        String[] table = new String[]{"enable_store_pack bool 是否使用门店包，true为使用，false为不使用，推广目的非门店推广时会忽略该字段。若选择使用，则卡片标题为{最近门店名称}",
-                "product_selling_points string[] 商品卖点，对应广告投放平台的推荐卖点",
-                "product_description string 商品描述",
-                "call_to_action string 行动号召",
-                "enable_personal_action bool 是否使用智能优选，true为使用，false为不使用",
-                "product_image_id string 商品图片ID，对应广告投放平台的推广卡片主图"};
+        String[] table = new String[]{"id number 转化id",
+                "opt_status string 操作状态，详见【附录-操作状态】",
+                "status string 转化状态，详见【附录-转化状态】",
+                "convert_data_type string 转化统计方式，广告平台统计该转化目标是否发生的方式"};
 
 
         // 字段名称
@@ -96,7 +94,7 @@ public class GetPojo {
 //        toData("TencentAdCreativeAddRequest",name,values,code,"template-pojo.ftl");
         // 生成带注释的实体类
 //        toData("ToutiaoAdvertiserReport", name, values, code, desc, "template-pojo-desc.ftl");
-        FreemarkerGeneratorUtil.toData("ToutiaoPromotionCar", name, values, code, desc,"头条推广卡片", "template-pojo-desc.ftl");
+        FreemarkerGeneratorUtil.toData("ToutiaoConvertCreateRes", name, values, code, desc,"头条新建转化跟踪返回结果", "template-pojo-desc.ftl");
     }
 
     public static void toData(String className, String[] fields, String[] value, String[] code, String tpl) throws Exception {
