@@ -2,7 +2,6 @@ package main.com.qw.study.cglib;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.cglib.beans.BeanGenerator;
@@ -24,16 +23,19 @@ import java.util.Objects;
 public class ReflectUtil {
 
     /**
-     *
+     * 动态获取属性
      * @param dest
      * @param addProperties
      * @return
      */
     public static Object getTarget(Object dest, Map<String, Object> addProperties) {
         PropertyUtilsBean propertyUtilsBean =new PropertyUtilsBean();
+        // 通过工具类获取当前类的所有属性
         PropertyDescriptor[] descriptors = propertyUtilsBean.getPropertyDescriptors(dest);
+        // 定义一个map来存在当前类的所有已有属性
         Map<String, Class> propertyMap = new HashMap<>();
         for(PropertyDescriptor d : descriptors) {
+            // 判断当前类的属性是不是一个对象
             if(!"class".equalsIgnoreCase(d.getName())) {
                 propertyMap.put(d.getName(), d.getPropertyType());
             }
@@ -134,21 +136,22 @@ public class ReflectUtil {
     @AllArgsConstructor
     @ToString
     @NoArgsConstructor
-    public static class Student {
+    public static class Student <T>{
         private String name;
         private String email;
+        private T data;
     }
 
 
     public static void main(String[] args) throws Exception{
-        Student student = Student.builder().name("jack").email("xy123zk@163.com").build();
-        student = new Student("haha","dfasfasd");
-        System.out.println(student.toString());
+        Student<Object> jack = Student.builder().name("jack").email("xy123zk@163.com").build();
+        Student<Student> student = new Student("haha","dfasfasd",jack);
+//        System.out.println(student.toString());
         Map<String,Object> properties = new HashMap<>();
         properties.put("address","浙江杭州");
         properties.put("age",26);
         Object target = getTarget(student, properties);
-        System.out.println(target.toString());
+//        System.out.println(target.toString());
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(getTarget(student,properties));
         System.out.println(json);
