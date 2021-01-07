@@ -23,7 +23,7 @@
         <jedis-version>2.7.3</jedis-version>
         <protostuff-version>1.0.8</protostuff-version>
         <commons-lang3>3.7</commons-lang3>
-        <commons-collections>3.2</commons-collections>
+        <commons-collections>3.2.2</commons-collections>
     </properties>
 
     <dependencies>
