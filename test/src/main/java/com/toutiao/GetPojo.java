@@ -47,10 +47,20 @@ public class GetPojo {
      */
     public static void getArticleListFromUrl() throws Exception {
 
-        String[] table = new String[]{"id number 转化id",
-                "opt_status string 操作状态，详见【附录-操作状态】",
-                "status string 转化状态，详见【附录-转化状态】",
-                "convert_data_type string 转化统计方式，广告平台统计该转化目标是否发生的方式"};
+        String[] table = new String[]{"id string 视频ID",
+                "size number 视频大小",
+                "width number 视频宽度",
+                "height number 视频高度",
+                "url string 视频地址，仅限同主体进行素材预览查看，若非同主体会返回“素材所属主体与开发者主体不一致无法获取URL”，链接1小时过期",
+                "format string 视频格式",
+                "signature string 视频md5值",
+                "poster_url string 视频首帧截图，仅限同主体进行素材预览查看，若非同主体会返回“素材所属主体与开发者主体不一致无法获取URL”，链接1小时过期",
+                "bit_rate number 码率，单位bps",
+                "duration number 视频时长",
+                "material_id number 素材id，即多合一报表中的素材id，一个素材唯一对应一个素材id",
+                "source string 素材来源，详见【附录-素材来源】",
+                "create_time string 素材的上传时间，格式：\"yyyy-mm-dd HH:MM:SS\"",
+                "filename string 素材的文件名"};
 
 
         // 字段名称
@@ -94,7 +104,7 @@ public class GetPojo {
 //        toData("TencentAdCreativeAddRequest",name,values,code,"template-pojo.ftl");
         // 生成带注释的实体类
 //        toData("ToutiaoAdvertiserReport", name, values, code, desc, "template-pojo-desc.ftl");
-        FreemarkerGeneratorUtil.toData("ToutiaoConvertCreateRes", name, values, code, desc,"头条新建转化跟踪返回结果", "template-pojo-desc.ftl");
+        FreemarkerGeneratorUtil.toData("ToutiaoVideoGetRes", name, values, code, desc,"头条获取视频详情", "template-pojo-desc.ftl");
     }
 
     public static void toData(String className, String[] fields, String[] value, String[] code, String tpl) throws Exception {
