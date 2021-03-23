@@ -47,20 +47,20 @@ public class GetPojo {
      */
     public static void getArticleListFromUrl() throws Exception {
 
-        String[] table = new String[]{"id string 视频ID",
-                "size number 视频大小",
-                "width number 视频宽度",
-                "height number 视频高度",
-                "url string 视频地址，仅限同主体进行素材预览查看，若非同主体会返回“素材所属主体与开发者主体不一致无法获取URL”，链接1小时过期",
-                "format string 视频格式",
-                "signature string 视频md5值",
-                "poster_url string 视频首帧截图，仅限同主体进行素材预览查看，若非同主体会返回“素材所属主体与开发者主体不一致无法获取URL”，链接1小时过期",
-                "bit_rate number 码率，单位bps",
-                "duration number 视频时长",
-                "material_id number 素材id，即多合一报表中的素材id，一个素材唯一对应一个素材id",
-                "source string 素材来源，详见【附录-素材来源】",
-                "create_time string 素材的上传时间，格式：\"yyyy-mm-dd HH:MM:SS\"",
-                "filename string 素材的文件名"};
+        String[] table = new String[]{"advertiser_id long 账户ID",
+                "unit_id long 广告组ID;一个组下只能有一个程序化创意",
+                "package_name string 程序化创意名称;1-100字符",
+                "horizontal_photo_ids string[] 横版视频IDlist横版视频与竖版视频字段至少传一个，可共传，但横版+竖版视频最多可传5个。",
+                "vertical_photo_ids string[] 竖版视频IDlist;横版视频与竖版视频字段至少传一个，可共传，但横版+竖版视频最多可传5个。",
+                "cover_image_tokens string[] 封面list;image_token最多可传4个,智能抽帧下需要为空",
+                "site_id long 建站id-计划类型为2的时候才有效，需要和组层级选择的app_id保持一致",
+                "sticker_styles int[] 封面贴纸；如果使用封面贴纸sticker_Styles和cover_slogans必须同时传值，最多选择6个",
+                "cover_slogans string[] 封面广告语；0-14字符，最多选择6个（每个中文和英文字符都算一个字符）",
+                "action_bar string 行动号召按钮",
+                "captions string[] 作品广告语每个不超过30个字符，英文字符两个算一个字符，最多可传3个",
+                "click_url string 第三方点击检测链接 不能超过1024字符；ocpx_action_type 是180并且应用没有接入sdk，监测链接必填；计划type是2（推广应用安装），ocpx_action_type是注册（396）、付费（190）、完件（384）、授信（383），并且没有接入sdk，监测链接必填",
+                "creative_category int 可选创意分类；由创意分类查询接口获得；必须是叶子结点；与创意标签同时传或同时不传",
+                "creative_tag List<String> 选创意分类；必填；创意标签与创意分类参数，要么都传，要么都不传；且单个创意的创意标签最多20个；单个创意标签不能为空且不能超过10字符"};
 
 
         // 字段名称
@@ -104,7 +104,7 @@ public class GetPojo {
 //        toData("TencentAdCreativeAddRequest",name,values,code,"template-pojo.ftl");
         // 生成带注释的实体类
 //        toData("ToutiaoAdvertiserReport", name, values, code, desc, "template-pojo-desc.ftl");
-        FreemarkerGeneratorUtil.toData("ToutiaoVideoGetRes", name, values, code, desc,"头条获取视频详情", "template-pojo-desc.ftl");
+        FreemarkerGeneratorUtil.toData("KwaiProgramCreativeRequest", name, values, code, desc,"快手更新程序化创意实体类", "template-pojo-desc.ftl");
     }
 
     public static void toData(String className, String[] fields, String[] value, String[] code, String tpl) throws Exception {
