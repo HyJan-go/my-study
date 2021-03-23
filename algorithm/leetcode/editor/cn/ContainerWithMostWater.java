@@ -79,10 +79,11 @@ class Solution {
 
         while (i < j){
             int min = Math.min(height[i], height[j]);
-            int multipart = min * (j - i);
-            if (multipart > result){
-                result = multipart;
-            }
+//            int multipart = min * (j - i);
+//            if (multipart > result){
+//                result = multipart;
+//            }
+            result = Math.max(result,min * (j - i));
             if (min == height[i]){
                 i ++;
             }else {
