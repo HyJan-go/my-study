@@ -15,7 +15,7 @@
         <slf4j-version>1.1.1</slf4j-version>
         <mysql-version>5.1.37</mysql-version>
         <druid-version>1.1.12</druid-version>
-        <mybatis-version>3.3.0</mybatis-version>
+        <mybatis-version>3.5.6</mybatis-version>
         <mybatis-spring-version>1.2.3</mybatis-spring-version>
         <jackon-version>2.5.4</jackon-version>
         <jstl-version>1.2</jstl-version>
