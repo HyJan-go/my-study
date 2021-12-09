@@ -17,7 +17,7 @@
         <druid-version>1.1.12</druid-version>
         <mybatis-version>3.3.0</mybatis-version>
         <mybatis-spring-version>1.2.3</mybatis-spring-version>
-        <jackon-version>2.5.4</jackon-version>
+        <jackon-version>2.9.10.8</jackon-version>
         <jstl-version>1.2</jstl-version>
         <servlet-version>3.1.0</servlet-version>
         <jedis-version>2.7.3</jedis-version>
