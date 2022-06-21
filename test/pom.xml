@@ -13,7 +13,7 @@
         <spring-version>4.1.7.RELEASE</spring-version>
         <junit-version>4.11</junit-version>
         <slf4j-version>1.1.1</slf4j-version>
-        <mysql-version>5.1.37</mysql-version>
+        <mysql-version>8.0.28</mysql-version>
         <druid-version>1.1.12</druid-version>
         <mybatis-version>3.3.0</mybatis-version>
         <mybatis-spring-version>1.2.3</mybatis-spring-version>
